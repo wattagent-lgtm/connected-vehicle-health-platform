@@ -15,12 +15,11 @@ jobs:
       - name: Compile Python sources
         run: |
           python -m compileall aws-dashboard/backend gateway/lilygo-micropython
-- name: Reject committed secrets
-  shell: bash
-  run: |
-    ! grep -RInE \
-      --exclude-dir=.git \
-      --exclude='*.md' \
-      --exclude='quality.yml' \
-      --exclude='config.py' \
-      '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|aws_secret_access_key)' .
+      - name: Reject committed secrets
+        shell: bash
+        run: |
+          ! grep -RInE \
+            --exclude-dir=.git \
+            --exclude='*.md' \
+            --exclude='quality.yml' \
+            '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|aws_secret_access_key)' .
