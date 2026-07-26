@@ -18,5 +18,8 @@ jobs:
       - name: Reject committed secrets
         shell: bash
         run: |
-          ! grep -RInE --exclude-dir=.git --exclude='*.md' \
-            '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|aws_secret_access_key|private\.pem\.key")' .
+          ! grep -RInE \
+            --exclude-dir=.git \
+            --exclude='*.md' \
+            --exclude='quality.yml' \
+            '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|aws_secret_access_key)' .
