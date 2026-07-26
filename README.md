@@ -153,6 +153,17 @@ See the complete [HMI Screenshot Gallery](docs/HMI_GALLERY.md).
 - Cloud status is not evidence of current vehicle status; data age is always
   evaluated independently.
 
+## Commercial packaging
+
+The proposed market-test package combines a THB 1,500 ESP32 OBD-II client and
+a THB 3,500 LILYGO 4G gateway package. A THB 4,900 Starter Kit includes
+onboarding and a 15-day cloud trial. The suggested recurring plans are Free,
+Car Care at THB 299/month, and AI Care at THB 499/month per vehicle.
+
+These are indicative planning prices rather than binding quotations. Review
+hardware, SIM, AWS, payment, support, tax and warranty costs before launch.
+See the [Commercial Offering](COMMERCIAL.md) for scope and disclaimers.
+
 ## Documentation
 
 - [System Architecture](docs/ARCHITECTURE.md)
@@ -165,6 +176,10 @@ See the complete [HMI Screenshot Gallery](docs/HMI_GALLERY.md).
 - [Verification and Soak Test](docs/TEST_PLAN.md)
 - [Operating Limits and Qualification](docs/OPERATING_LIMITS.md)
 - [Nissan T32 CONSULT Research Phase](docs/NISSAN_T32_CONSULT_READ_ONLY_INTEGRATION.md)
+- [Commercial Offering](COMMERCIAL.md)
+- [Subscription Plans](docs/SUBSCRIPTION_PLANS.md)
+- [AI-Assisted Features](docs/AI_FEATURES.md)
+- [Customer Data and Privacy](docs/CUSTOMER_DATA_PRIVACY.md)
 - [Security and Safety](SECURITY.md)
 
 ## License
