@@ -135,6 +135,14 @@ in [Deployment Guide](docs/DEPLOYMENT.md).
 - Predictive-maintenance indicators based on transparent rules
 - Nissan-specific/CONSULT section clearly separated from SAE standard data
 
+## HMI preview
+
+![Vehicle Health driver overview](docs/images/hmi-driver-health.png)
+
+The dashboard separates driver health, live engineering trends, trip
+estimation, workshop diagnostics and maintenance into task-focused views.
+See the complete [HMI Screenshot Gallery](docs/HMI_GALLERY.md).
+
 ## Engineering limits
 
 - Standard OBD-II does not guarantee fuel level, ambient temperature, MAF or
@@ -152,6 +160,7 @@ in [Deployment Guide](docs/DEPLOYMENT.md).
 - [OBD-II Data Reference](docs/OBD2_DATA_REFERENCE.md)
 - [Data Model and API](docs/DATA_MODEL.md)
 - [Dashboard/HMI](docs/HMI_DASHBOARD.md)
+- [HMI Screenshot Gallery](docs/HMI_GALLERY.md)
 - [Deployment Guide](docs/DEPLOYMENT.md)
 - [Verification and Soak Test](docs/TEST_PLAN.md)
 - [Operating Limits and Qualification](docs/OPERATING_LIMITS.md)
