@@ -1,5 +1,4 @@
 """Compact bounded in-memory gateway log."""
-
 from config import LOG_CAPACITY
 from utils import iso_time
 
@@ -56,4 +55,3 @@ class GatewayLogger:
             retained.append(self._items[(start + offset) % total])
         self._items = retained
         self._next = 0
-

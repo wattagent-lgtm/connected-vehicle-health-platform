@@ -2,8 +2,8 @@
 
 ## Engineering Design and Validation Guide
 
-**Target vehicle:** Nissan X-Trail T32, 2.5 L gasoline, model year 2015  
-**Project:** ESP32 OBD-II client, LILYGO LTE gateway, AWS IoT, and Vehicle Health dashboard  
+**Target vehicle:** Nissan X-Trail T32, 2.5 L gasoline, model year 2015
+**Project:** ESP32 OBD-II client, LILYGO LTE gateway, AWS IoT, and Vehicle Health dashboard
 **Document status:** Design specification — proprietary identifiers must be verified before implementation
 
 > This design intentionally contains no guessed Nissan CAN identifiers, diagnostic addresses, data identifiers, scaling formulas, or security keys. Every proprietary signal must be obtained from an authorized source and validated against the exact vehicle.
