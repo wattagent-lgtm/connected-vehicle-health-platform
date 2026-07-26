@@ -11,10 +11,18 @@ installation, SIM, cloud and support costs before launch.
 |---|---:|---|
 | ESP32 OBD-II client | THB 1,500 | Read-only standard OBD-II acquisition, Wi-Fi and TCP telemetry |
 | LILYGO 4G gateway package | THB 3,500 | LTE gateway hardware, initial SIM and gateway firmware |
-| Vehicle Health Starter Kit | THB 4,900 | OBD-II client, 4G gateway, onboarding and 15-day web trial |
+| Vehicle Health Starter Kit — Early Bird | THB 4,900 | OBD-II client, 4G gateway, onboarding and 15-day web trial |
 
 Shipping, vehicle installation, taxes, replacement parts and ongoing mobile
 data are quoted separately unless explicitly included by the seller.
+
+### Early-bird launch offer
+
+The THB 4,900 Starter Kit price is an early-bird promotional offer scheduled
+to open on **1 October 2026**. It is not the standard list price. Availability,
+quantity, eligibility, promotional end date, shipping, installation and final
+terms must be confirmed before orders are accepted. The 15-day web trial still
+starts only after the first valid cloud telemetry record is received.
 
 ## Commercial principles
 

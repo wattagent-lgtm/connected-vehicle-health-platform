@@ -156,9 +156,11 @@ See the complete [HMI Screenshot Gallery](docs/HMI_GALLERY.md).
 ## Commercial packaging
 
 The proposed market-test package combines a THB 1,500 ESP32 OBD-II client and
-a THB 3,500 LILYGO 4G gateway package. A THB 4,900 Starter Kit includes
-onboarding and a 15-day cloud trial. The suggested recurring plans are Free,
-Car Care at THB 299/month, and AI Care at THB 499/month per vehicle.
+a THB 3,500 LILYGO 4G gateway package. The THB 4,900 Starter Kit is an
+**early-bird promotional price opening on 1 October 2026** and includes
+onboarding and a 15-day cloud trial. It is not the standard list price. The
+suggested recurring plans are Free, Car Care at THB 299/month, and AI Care at
+THB 499/month per vehicle.
 
 These are indicative planning prices rather than binding quotations. Review
 hardware, SIM, AWS, payment, support, tax and warranty costs before launch.
