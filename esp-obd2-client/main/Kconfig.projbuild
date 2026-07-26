@@ -1,0 +1,50 @@
+menu "OBD-II Wi-Fi Client"
+
+config OBD_WIFI_SSID
+    string "Wi-Fi SSID"
+    default "YOUR_WIFI_SSID"
+
+config OBD_WIFI_PASSWORD
+    string "Wi-Fi password"
+    default "YOUR_WIFI_PASSWORD"
+
+config OBD_GATEWAY_HOST
+    string "Gateway IPv4 address"
+    default "192.168.1.42"
+
+config OBD_GATEWAY_PORT
+    int "Gateway TCP port"
+    default 5005
+
+config OBD_DEVICE_ID
+    string "Vehicle device ID"
+    default "CAR-01-OBD"
+
+config OBD_DEVICE_NAME
+    string "Vehicle display name"
+    default "Vehicle-01"
+
+config OBD_SIMULATOR
+    bool "Use simulator instead of vehicle CAN"
+    default y
+
+config OBD_CAN_TX_GPIO
+    int "TWAI TX GPIO (ESP-OBD2 DI)"
+    default 26
+
+config OBD_CAN_RX_GPIO
+    int "TWAI RX GPIO (ESP-OBD2 RO)"
+    default 27
+
+choice OBD_CAN_BITRATE
+    prompt "Vehicle diagnostic CAN bitrate"
+    default OBD_CAN_500K
+
+config OBD_CAN_500K
+    bool "500 kbit/s"
+
+config OBD_CAN_250K
+    bool "250 kbit/s"
+endchoice
+
+endmenu

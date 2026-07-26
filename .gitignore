@@ -1,0 +1,31 @@
+# Secrets and credentials
+certs/
+*.pem
+*.key
+*.crt
+.env
+.env.*
+
+# ESP-IDF generated state
+esp-obd2-client/build/
+esp-obd2-client/sdkconfig
+esp-obd2-client/sdkconfig.old
+managed_components/
+dependencies.lock
+
+# Python and AWS tooling
+__pycache__/
+*.py[cod]
+.aws-sam/
+
+# Test/deployment output
+*.log
+reliability-*.csv
+loadtest-*.csv
+multirate-*.csv
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

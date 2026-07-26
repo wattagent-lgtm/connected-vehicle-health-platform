@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: CAR-01-OBD health REST API backed by the existing DynamoDB telemetry table.
+
+Parameters:
+  TelemetryTableName:
+    Type: String
+    Default: iiot-gateway-telemetry
+  DefaultDeviceId:
+    Type: String
+    Default: CAR-01-OBD
+
+Globals:
+  Function:
+    Runtime: python3.13
+    Architectures:
+      - arm64
+    Timeout: 10
+    MemorySize: 256
+    Tracing: Active
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref TelemetryTableName
+        DEFAULT_DEVICE_ID: !Ref DefaultDeviceId
+        QUERY_LIMIT: "100"
+        MAINTENANCE_QUERY_LIMIT: "300"
+
+Resources:
+  CarHealthHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: v1
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - GET
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+
+  CarHealthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: car-health-api
+      Description: Merges recent OBD fast/slow telemetry and calculates car health.
+      CodeUri: .
+      Handler: backend.car_health_api.lambda_function.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref TelemetryTableName
+      Events:
+        Health:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /api/cars/{device_id}/health
+            Method: GET
+        Latest:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /api/cars/{device_id}/latest
+            Method: GET
+        History:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /api/cars/{device_id}/history
+            Method: GET
+        Maintenance:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /api/cars/{device_id}/maintenance
+            Method: GET
+        Trip:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /api/cars/{device_id}/trip
+            Method: GET
+        Dashboard:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /
+            Method: GET
+        DashboardAsset:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref CarHealthHttpApi
+            Path: /assets/{asset}
+            Method: GET
+
+Outputs:
+  ApiBaseUrl:
+    Description: Base URL for the deployed Car Health API.
+    Value: !Sub "https://${CarHealthHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/v1"
+  HealthUrl:
+    Description: CAR-01-OBD health endpoint.
+    Value: !Sub "https://${CarHealthHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/v1/api/cars/${DefaultDeviceId}/health"
+  LambdaFunctionName:
+    Value: !Ref CarHealthFunction
+  DashboardUrl:
+    Description: HTTPS vehicle health dashboard URL.
+    Value: !Sub "https://${CarHealthHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/v1/"

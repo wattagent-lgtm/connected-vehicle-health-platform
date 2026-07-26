@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Vehicle Health</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">VH</div>
+      <div>
+        <h1>Vehicle Health</h1>
+        <p>Industrial IoT · AWS Connected Mobility</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span class="plan-pill">FREE PLAN</span>
+      <div class="connection">
+        <span id="connection-dot" class="dot"></span>
+        <span id="connection-label">Connecting</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="customer-nav" aria-label="Vehicle dashboard sections">
+      <a class="active" href="#health">Driver health</a>
+      <a href="#live-data">Live trends</a>
+      <a href="#trip-estimation">Trip estimate</a>
+      <a href="#diagnostics">Workshop diagnostics</a>
+      <a href="#maintenance">Maintenance</a>
+    </nav>
+
+    <section class="welcome-strip panel">
+      <div>
+        <p class="eyebrow">DRIVER HEALTH</p>
+        <strong>Your vehicle status, explained clearly.</strong>
+        <span>Read-only OBD-II monitoring. We never send control commands to the vehicle.</span>
+      </div>
+      <div class="privacy-state">
+        <span>DATA OWNER</span>
+        <strong>Customer</strong>
+        <small>Not shared with a garage</small>
+      </div>
+    </section>
+
+    <section id="health" class="hero panel">
+      <div>
+        <p class="eyebrow">MY VEHICLE / CAR-01</p>
+        <h2 id="vehicle-name">Vehicle-01</h2>
+        <div class="vehicle-meta">
+          <span id="device-id">CAR-01-OBD</span>
+          <span id="source-mode">SIMULATOR</span>
+          <span id="last-update">Waiting for telemetry</span>
+        </div>
+      </div>
+      <div class="health-block">
+        <div class="health-status">
+          <p class="eyebrow">CURRENT CONDITION</p>
+          <h3 id="health-level">LOADING</h3>
+          <p id="health-summary">Evaluating vehicle telemetry</p>
+          <span id="health-score" class="hidden-score">--</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cockpit panel">
+      <article class="dial-card">
+        <div class="dial"><div id="rpm-needle" class="needle"></div><div class="hub"></div>
+          <div class="dial-readout"><strong id="dial-rpm">--</strong><span>RPM</span></div>
+        </div><p>ENGINE SPEED</p>
+      </article>
+      <div class="drive-status">
+        <p class="eyebrow">X-TRAIL T32 / LIVE DRIVE</p><strong id="drive-state">STANDBY</strong>
+        <span id="drive-detail">Waiting for OBD-II telemetry</span>
+        <div class="status-chips"><i id="chip-link">OBD LINK</i><i id="chip-voltage">BATTERY</i><i id="chip-dtc">DTC</i></div>
+      </div>
+      <article class="dial-card">
+        <div class="dial"><div id="speed-needle" class="needle"></div><div class="hub"></div>
+          <div class="dial-readout"><strong id="dial-speed">--</strong><span>km/h</span></div>
+        </div><p>ROAD SPEED</p>
+      </article>
+    </section>
+
+    <section class="annunciator panel">
+      <div id="ann-vehicle" class="ann-lamp"><span>VEHICLE</span><strong>WAIT</strong></div>
+      <div id="ann-obd" class="ann-lamp"><span>OBD-II</span><strong>WAIT</strong></div>
+      <div id="ann-battery" class="ann-lamp"><span>BATTERY</span><strong>WAIT</strong></div>
+      <div id="ann-dtc" class="ann-lamp"><span>DTC</span><strong>CHECK</strong></div>
+      <div id="ann-cloud" class="ann-lamp"><span>AWS CLOUD</span><strong>WAIT</strong></div>
+      <div id="ann-data" class="ann-lamp"><span>DATA AGE</span><strong>--</strong></div>
+    </section>
+
+    <section class="metrics">
+      <article class="metric-card accent-cyan">
+        <p>Engine Speed</p>
+        <strong id="engine-rpm">--</strong>
+        <span>rpm</span>
+      </article>
+      <article class="metric-card accent-blue">
+        <p>Vehicle Speed</p>
+        <strong id="vehicle-speed">--</strong>
+        <span>km/h</span>
+      </article>
+      <article class="metric-card accent-orange">
+        <p>Coolant</p>
+        <strong id="coolant">--</strong>
+        <span>°C</span>
+      </article>
+      <article class="metric-card accent-green">
+        <p>Fuel Level</p>
+        <strong id="fuel-level">--</strong>
+        <span>%</span>
+      </article>
+    </section>
+
+    <section class="metrics secondary-metrics">
+      <article class="metric-card accent-purple">
+        <p>Module Voltage</p><strong id="module-voltage">--</strong><span>V</span>
+      </article>
+      <article class="metric-card accent-orange">
+        <p>Ambient Air</p><strong id="ambient-air">--</strong><span>°C</span>
+      </article>
+      <article class="metric-card accent-blue">
+        <p>Engine Runtime</p><strong id="engine-runtime">--</strong>
+      </article>
+      <article class="metric-card accent-cyan">
+        <p>Vehicle Link</p><strong id="vehicle-link">--</strong>
+      </article>
+    </section>
+
+    <section class="panel extended-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">WORKSHOP DIAGNOSTICS / MODE 01</p>
+          <h3>Fuel, air and emissions details</h3>
+        </div>
+        <span id="extended-support" class="badge neutral">Waiting</span>
+      </div>
+      <div class="extended-grid">
+        <article><span>Fuel system</span><strong id="fuel-system-status">--</strong><small>PID 03</small></article>
+        <article><span>Short fuel trim B1</span><strong id="short-fuel-trim">--</strong><small>PID 06</small></article>
+        <article><span>Long fuel trim B1</span><strong id="long-fuel-trim">--</strong><small>PID 07</small></article>
+        <article><span>Intake manifold</span><strong id="intake-manifold">--</strong><small>PID 0B</small></article>
+        <article><span>Mass airflow</span><strong id="mass-airflow">--</strong><small>PID 10</small></article>
+        <article><span>Fuel rate</span><strong id="engine-fuel-rate">--</strong><small>PID 5E</small></article>
+        <article><span>Distance with MIL</span><strong id="distance-mil">--</strong><small>PID 21</small></article>
+        <article><span>Distance since clear</span><strong id="distance-clear">--</strong><small>PID 31</small></article>
+        <article><span>OBD standard</span><strong id="obd-standard">--</strong><small>PID 1C</small></article>
+        <article><span>Fuel type</span><strong id="fuel-type">--</strong><small>PID 51</small></article>
+      </div>
+      <p class="safety-note">Unsupported PIDs remain “--”. Extended values update approximately every 30 seconds to protect ECU and CAN-bus capacity.</p>
+    </section>
+
+    <section id="live-data" class="grid">
+      <article class="panel chart-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">REAL-TIME FLIGHT RECORDER</p>
+            <h3>Live powertrain trend</h3>
+          </div>
+          <div class="legend">
+            <button class="signal-toggle active" data-signal="engine_rpm"><i class="rpm"></i>RPM</button>
+            <button class="signal-toggle active" data-signal="vehicle_speed_kph"><i class="speed"></i>Speed</button>
+            <button class="signal-toggle active" data-signal="coolant_c"><i class="temp"></i>Coolant</button>
+            <button class="signal-toggle active" data-signal="engine_load_pct"><i class="load"></i>Load</button>
+            <button class="signal-toggle active" data-signal="throttle_pct"><i class="throttle"></i>Throttle</button>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="history-chart"></canvas>
+        </div>
+      </article>
+
+      <article class="panel detail-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LIVE PARAMETERS</p>
+            <h3>Engine condition</h3>
+          </div>
+        </div>
+        <dl>
+          <div><dt>Engine load</dt><dd id="engine-load">--</dd></div>
+          <div><dt>Throttle</dt><dd id="throttle">--</dd></div>
+          <div><dt>Intake air</dt><dd id="intake-air">--</dd></div>
+          <div><dt>OBD successful reads</dt><dd id="obd-success">--</dd></div>
+          <div><dt>OBD read errors</dt><dd id="obd-errors">--</dd></div>
+          <div><dt>OBD data age</dt><dd id="obd-data-age">--</dd></div>
+          <div><dt>Data age</dt><dd id="data-age">--</dd></div>
+          <div><dt>PID mask</dt><dd id="pid-mask">--</dd></div>
+          <div><dt>Client heap</dt><dd id="client-heap">--</dd></div>
+          <div><dt>Data classes</dt><dd id="data-classes">--</dd></div>
+          <div><dt>Read mode</dt><dd id="read-mode">--</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <section id="diagnostics" class="panel dtc-panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">READ-ONLY DIAGNOSTICS</p><h3>Diagnostic trouble codes</h3></div>
+        <span id="dtc-count" class="badge">0</span>
+      </div>
+      <div class="dtc-columns">
+        <div><h4>Stored</h4><div id="dtc-stored" class="dtc-list"><span>None</span></div></div>
+        <div><h4>Pending</h4><div id="dtc-pending" class="dtc-list"><span>None</span></div></div>
+        <div><h4>Permanent</h4><div id="dtc-permanent" class="dtc-list"><span>None</span></div></div>
+      </div>
+      <p class="safety-note">Read-only OBD-II diagnostics. Mode 04 clear-DTC commands are disabled.</p>
+    </section>
+
+    <section class="panel bars-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">NORMALIZED LIVE LOAD</p>
+          <h3>Vehicle operating parameters</h3>
+        </div>
+        <span class="scale-note">0–100% of display range</span>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label"><span>Engine RPM</span><strong id="bar-rpm-value">--</strong></div>
+          <div class="bar-track"><i id="bar-rpm" class="bar-fill cyan"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Vehicle speed</span><strong id="bar-speed-value">--</strong></div>
+          <div class="bar-track"><i id="bar-speed" class="bar-fill blue"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Engine load</span><strong id="bar-load-value">--</strong></div>
+          <div class="bar-track"><i id="bar-load" class="bar-fill orange"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Throttle</span><strong id="bar-throttle-value">--</strong></div>
+          <div class="bar-track"><i id="bar-throttle" class="bar-fill purple"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Coolant temperature</span><strong id="bar-coolant-value">--</strong></div>
+          <div class="bar-track"><i id="bar-coolant" class="bar-fill red"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Fuel level</span><strong id="bar-fuel-value">--</strong></div>
+          <div class="bar-track"><i id="bar-fuel" class="bar-fill green"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trip-estimation" class="panel trip-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">READ-ONLY OBD ESTIMATION</p>
+          <h3>Trip &amp; fuel estimation</h3>
+        </div>
+        <div class="trip-badges">
+          <span id="trip-status" class="badge neutral">WAITING</span>
+          <span id="trip-confidence" class="confidence-badge">LOW CONFIDENCE</span>
+        </div>
+      </div>
+      <div class="trip-primary">
+        <article><span>Estimated distance</span><strong id="trip-distance">--</strong><small>km</small></article>
+        <article><span>Estimated fuel used</span><strong id="trip-fuel-used">--</strong><small>L</small></article>
+        <article><span>Average economy</span><strong id="trip-economy">--</strong><small>L/100 km</small></article>
+        <article><span>Fuel efficiency</span><strong id="trip-km-l">--</strong><small>km/L</small></article>
+      </div>
+      <div class="trip-detail">
+        <dl>
+          <div><dt>Observed duration</dt><dd id="trip-duration">--</dd></div>
+          <div><dt>Average speed</dt><dd id="trip-average-speed">--</dd></div>
+          <div><dt>Maximum speed</dt><dd id="trip-max-speed">--</dd></div>
+          <div><dt>Maximum RPM</dt><dd id="trip-max-rpm">--</dd></div>
+          <div><dt>Current fuel rate</dt><dd id="trip-fuel-rate">--</dd></div>
+          <div><dt>Instant economy</dt><dd id="trip-instant-economy">--</dd></div>
+          <div><dt>Idle time</dt><dd id="trip-idle-time">--</dd></div>
+          <div><dt>Idle fuel</dt><dd id="trip-idle-fuel">--</dd></div>
+        </dl>
+        <div class="coverage-card">
+          <div><span>DATA COVERAGE</span><strong id="trip-coverage">--%</strong></div>
+          <div class="coverage-track"><i id="trip-coverage-bar"></i></div>
+          <p id="trip-method">Waiting for MAF or direct fuel-rate PID.</p>
+          <small id="trip-window">No trip window available</small>
+        </div>
+      </div>
+      <p class="safety-note">Estimated distance is integrated from vehicle speed. Fuel is calculated from direct PID 5E when available, otherwise from MAF using gasoline AFR 14.7:1 and fuel density 745 g/L. These values are informational and are not odometer, billing or tax records.</p>
+    </section>
+
+    <section class="panel alerts-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">HEALTH EVENTS</p>
+          <h3>Active warnings</h3>
+        </div>
+        <span id="warning-count" class="badge">0</span>
+      </div>
+      <div id="warnings" class="warnings">
+        <p class="empty">No active vehicle warnings.</p>
+      </div>
+    </section>
+
+    <section id="maintenance" class="panel maintenance-panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">CAR CARE</p><h3>Maintenance planner</h3></div>
+        <span class="badge neutral">FREE</span>
+      </div>
+      <div class="maintenance-grid">
+        <article><span class="service-icon">01</span><div><strong>Engine oil service</strong><small>Set the last service date and odometer in your account.</small></div><em>Not configured</em></article>
+        <article><span class="service-icon">02</span><div><strong>Battery inspection</strong><small>Module voltage is monitored while live data is available.</small></div><em id="maintenance-battery">Waiting for data</em></article>
+        <article><span class="service-icon">03</span><div><strong>Diagnostic check</strong><small>Stored, pending and permanent trouble codes are read safely.</small></div><em id="maintenance-dtc">Waiting for data</em></article>
+        <article><span class="service-icon">04</span><div><strong>Next service reminder</strong><small>Mileage reminders and reports are part of Premium Car Care.</small></div><em>Available in Car Care</em></article>
+      </div>
+      <p class="safety-note">The dashboard never clears DTCs or sends control commands to the vehicle. Recommendations are informational and do not replace professional inspection.</p>
+    </section>
+
+    <section class="panel prediction-panel" aria-labelledby="prediction-title">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">CONDITION-BASED CAR CARE</p>
+          <h3 id="prediction-title">Predictive maintenance</h3>
+        </div>
+        <span id="prediction-status" class="prediction-state insufficient_data">ANALYZING</span>
+      </div>
+      <div class="prediction-summary">
+        <div>
+          <strong id="prediction-headline">Building evidence from recent trips</strong>
+          <span id="prediction-window">Waiting for the maintenance API</span>
+        </div>
+        <div class="baseline-state">
+          <small>PERSONAL VEHICLE BASELINE</small>
+          <strong id="baseline-status">COLLECTING</strong>
+          <span id="baseline-message">A reliable baseline requires comparable driving over time.</span>
+        </div>
+      </div>
+      <div id="prediction-findings" class="prediction-grid">
+        <p class="empty">Analyzing cooling, charging, fuel/air, diagnostics and OBD data quality.</p>
+      </div>
+      <p class="safety-note">This feature uses transparent condition rules and recent trends. It does not claim remaining component life, replace Nissan service procedures, or control the vehicle.</p>
+    </section>
+
+    <section class="panel account-panel">
+      <div>
+        <p class="eyebrow">CUSTOMER DATA &amp; CONSENT</p>
+        <h3>You control access to your vehicle information</h3>
+        <p>Telemetry is private by default. A future garage or fleet connection must be explicitly approved and can be revoked.</p>
+      </div>
+      <div class="account-facts">
+        <span><strong>1</strong> vehicle</span>
+        <span><strong>7 days</strong> history</span>
+        <span><strong>Private</strong> sharing</span>
+        <span><strong>Read only</strong> OBD-II</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>AWS IoT Core → DynamoDB → Lambda → API Gateway</span>
+    <span id="records-evaluated">0 records evaluated</span>
+  </footer>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/app.js"></script>
+</body>
+</html>

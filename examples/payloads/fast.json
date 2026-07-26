@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "protocol": "iiot-edge-json",
+  "protocol_version": 1,
+  "device_id": "CAR-01-OBD",
+  "device_name": "Vehicle-01",
+  "device_type": "obd2_vehicle",
+  "site": "mobile",
+  "area": "vehicle",
+  "asset": "car01",
+  "message_type": "telemetry",
+  "data_class": "fast",
+  "source_mode": "simulator",
+  "sequence": 1,
+  "message_id": "CAR-01-OBD-1",
+  "uptime_ms": 1000,
+  "data": {
+    "engine_rpm": 850,
+    "vehicle_speed_kph": 0,
+    "engine_load_pct": 22.5,
+    "throttle_pct": 5.2
+  }
+}

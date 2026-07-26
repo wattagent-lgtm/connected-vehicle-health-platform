@@ -1,0 +1,18 @@
+version = 0.1
+
+[default.build.parameters]
+cached = true
+parallel = true
+
+[default.validate.parameters]
+lint = true
+
+[default.deploy.parameters]
+stack_name = "car-health-dashboard"
+resolve_s3 = true
+s3_prefix = "car-health-dashboard"
+region = "ap-southeast-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "TelemetryTableName=\"iiot-gateway-telemetry\" DefaultDeviceId=\"CAR-01-OBD\""
+image_repositories = []
